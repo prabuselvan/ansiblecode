@@ -1,0 +1,19 @@
+- name: install apache webserver
+  yum:
+    name: httpd
+    state: present
+- name: copy index.html to var/www/html.index.html
+  template:
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart apache
+- name: start and enable httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+
